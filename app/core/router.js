@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 
 PORT = process.env.PORT || 3300;
 
+var path = require('path');
+assetsPath = path.join(__dirname, '../../assets');
+
 var controllers = {};
 var controllersPath = process.cwd() + '/app/controllers';
 
@@ -22,6 +25,8 @@ fs.readdirSync(controllersPath).forEach((file) => {
 //  Use bodyparser as our express parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use('/assets', express.static(assetsPath));
 
 //  Root API
 app.get('/', (req, res) => {
